@@ -9,7 +9,7 @@ import { removecart } from '../auth/_redux/authaction';
 const Cart = () => {
     const dispatch = useDispatch()
     const cartitem = useSelector(state => state.cart);
-    console.log("cartedItem",cartitem);
+    // console.log("cartedItem",cartitem);
     // console.log("carted Item >>> ",cartitem)
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
@@ -38,7 +38,7 @@ const Cart = () => {
                                         <p className="card-text"><strong>createdAt</strong>:{item.createdAt}</p>
                                         <p className="card-text"><strong>createdAt</strong>:{item.createdAt}</p>
                                         <button className='btn btn-danger' onClick={()=>{
-                                            console.log("removed")
+                                            // console.log("removed")
                                             ;dispatch(removecart(item.name))} }><RemoveCircle/>Remove</button>
                                     </div>
                             </div>
