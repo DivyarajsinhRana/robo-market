@@ -1,7 +1,7 @@
 
 
 
-const Robotcard = ({item}) => {
+const Robotcard = ({item,index,handleClick}) => {
         
     return (
         <div className="card" style={{width: "18rem"}}>
@@ -12,7 +12,7 @@ const Robotcard = ({item}) => {
                                         <p className="card-text"><strong>Price</strong>:{item.price}</p>
                                         <p className="card-text"><strong>Stock</strong>:{item.stock}</p>
                                         <p className="card-text"><strong>createdAt</strong>:{item.createdAt}</p>
-                                       
+                                       <button className='btn btn-success' onClick={() =>handleClick(item)} id={index}>Add to cart</button>
                                     </div>
                             </div>
     )

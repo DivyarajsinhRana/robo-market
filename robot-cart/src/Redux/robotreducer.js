@@ -15,8 +15,4 @@ const robotreducer = (state = initialstate,action)=> {
         }
 } 
 
-
-
-
-
 export default robotreducer;

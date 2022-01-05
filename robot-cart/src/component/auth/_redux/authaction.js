@@ -8,6 +8,20 @@ export const getrobots = (robots) => {
         payload : robots
     })
 }
+export const addtocart = (item) => {
+    return (
+        {
+            type : "addtocart",
+            payload : item
+        }
+    )
+}
+export const removecart = (name) => {
+    return {
+        type : 'removecart',
+        payload : name
+    }
+}
 export const getAllRobots = () => {
     return (dispatch) => {
             axios.get(GET_ROBOTS).then((res)=>{

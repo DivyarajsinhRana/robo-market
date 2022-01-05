@@ -1,8 +1,9 @@
 import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
-import { getAllRobots } from "../component/auth/_redux/authaction";
-import robotreducer from "./robotreducer";
-export const store = createStore(robotreducer,applyMiddleware(thunk));
+
+import rootreducer from "./combinereducer";
+
+export const store = createStore(rootreducer,applyMiddleware(thunk));
 
 // store.dispatch(getAllRobots())
 // console.log(store.getState());  
