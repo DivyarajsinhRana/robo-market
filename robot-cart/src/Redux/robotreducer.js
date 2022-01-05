@@ -1,5 +1,5 @@
 const initialstate  = {
-    robots : []
+    robots : [],
 };
 // const robots = [] 
 const robotreducer = (state = initialstate,action)=> {
