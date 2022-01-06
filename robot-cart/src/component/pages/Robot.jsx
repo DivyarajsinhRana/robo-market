@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addtocart, getAllRobots } from '../auth/_redux/authaction';
+import {  getAllRobots } from '../auth/_redux/authaction';
 import Cart from './Cart';
 import Filter from './Filter';
 import Robotcard from './Robotcard';
@@ -26,10 +26,7 @@ const Robot = () => {
         // console.log("useStatedata>>>", robotdata);
     }, [robotdata])
 
-    const handleClick = (item) => {
-        // console.log(item);
-        dispatch(addtocart(item))
-    }
+   
     const length = filterRobots && filterRobots.length;
     //   const datemap = filterRobots && filterRobots.map(item => item.createdAt = )
     //   console.log(datemap);
@@ -54,8 +51,7 @@ const Robot = () => {
                     // console.log("item>>>", item.name)
                     return (
                         <div className='col-3 mt-3 gx-5' key={index}>
-                            <Robotcard index={index} item={item} handleClick={handleClick} />
-
+                            <Robotcard index={index} item={item} />
                         </div>
                     )
                 })
