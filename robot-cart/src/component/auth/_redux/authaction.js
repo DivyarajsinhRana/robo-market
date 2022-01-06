@@ -35,6 +35,18 @@ export const DecreaseQuantity = (end) => {
         payload : end
     }
 }
+export const stockInc = (count) =>{
+    return{
+        type : "stockincrease",
+        payload : count
+    }
+}
+export const stockDec = (count) =>{
+    return{
+        type : "stockdecrease",
+        payload : count
+    }
+}
 export const getAllRobots = () => {
     return (dispatch) => {
             axios.get(GET_ROBOTS).then((res)=>{

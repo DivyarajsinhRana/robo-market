@@ -9,6 +9,7 @@ const Robot = () => {
     
     const dispatch = useDispatch();
     const robotdata = useSelector(state => state.robots.data);
+    const stock = useSelector(state => state.stock);
 
     // console.log("selected state >>>", robotdata);
     // const material = robotdata.map((item)=> item.material);
@@ -51,7 +52,7 @@ const Robot = () => {
                     // console.log("item>>>", item.name)
                     return (
                         <div className='col-3 mt-3 gx-5' key={index}>
-                            <Robotcard index={index} item={item} />
+                            <Robotcard index={index} item={item} stock={stock}/>
                         </div>
                     )
                 })

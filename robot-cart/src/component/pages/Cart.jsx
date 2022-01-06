@@ -3,7 +3,7 @@ import { AddOutlined, AddShoppingCart, Remove, RemoveCircle, RemoveCircleOutline
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { removecart,IncreaseQuantity,DecreaseQuantity } from '../auth/_redux/authaction';
+import { removecart,IncreaseQuantity,DecreaseQuantity,stockDec,stockInc } from '../auth/_redux/authaction';
 const Cart = () => {
     const dispatch = useDispatch()
     const cartitem = useSelector(state => state.cart);
@@ -23,14 +23,8 @@ const Cart = () => {
     const price = quantity.map((item)=> item.price = parseFloat(item.price));
     console.log("price>>>>",price);
     const pricerreducer = (previousValue, currentValue) => previousValue + currentValue
-   
-    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
-    // const amountArray=cartitem.map(cart=>cart.price);
-    // const amountArrayInt=amountArray.map(price=>price = parseFloat(price));
-    // console.log(amountArray);
-    // const [count,setCount] = useState(1)
     const totalamount= price.reduce(pricerreducer,0)
-    const total = ()=>{ if(cartitem.length === 0) {
+    const total = ()=>{ if(quantity.length === 0) {
         setAmount(0)
     }
     else{
@@ -43,9 +37,11 @@ const Cart = () => {
     
     const handleInc = (item) =>{
         dispatch(IncreaseQuantity(item))
+        dispatch(stockDec(item.stock))
     }
     const handleDec = (quantity) =>{
-        dispatch(DecreaseQuantity(quantity.length))
+            dispatch(DecreaseQuantity(quantity.length))
+            dispatch(stockInc(quantity.stock));
     }
     return (
         <div>
