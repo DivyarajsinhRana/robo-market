@@ -1,11 +1,9 @@
 import { Drawer } from '@material-ui/core';
-import { RemoveCircle } from '@material-ui/icons';
-import { useState } from 'react'
+import { RemoveCircle} from '@material-ui/icons';
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { removecart } from '../auth/_redux/authaction';
-
-
 const Cart = () => {
     const dispatch = useDispatch()
     const cartitem = useSelector(state => state.cart);
@@ -18,6 +16,22 @@ const Cart = () => {
     const handleClose = () => {
         setOpen(false)
     }
+    // setting total amount
+    const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    const amountArray=cartitem.map(cart=>cart.price);
+    const amountArrayInt=amountArray.map(price=>price = parseFloat(price));
+    console.log(amountArray);
+    const [amount,setAmount] = useState(0);
+    const total = ()=>{ if(cartitem.length === 0) {
+        setAmount(0)
+    }
+    else{
+        const totalamount = amountArrayInt.reduce(reducer);
+        setAmount(totalamount);
+    }}
+    useEffect(() => {
+        total();
+    }, [cartitem])
     return (
         <div>
             <button className="btn btn-info" onClick={handleOpen}>
@@ -25,17 +39,17 @@ const Cart = () => {
             </button>
             <Drawer open={open} onClose={handleClose} anchor="right" className="cartDrawer" variant='temporary'>
                 <h2>You have {cartitem.length} item in yout cart</h2>
+                <div>
         {
-            cartitem && cartitem.map((item,index)=>{
+              cartitem && cartitem.map((item,index)=>{
                 return (
                     <div className="card mx-auto" style={{width: "18rem"}} key={index}>
                                 <img className="card-img-top" src={item.image} alt="Card image cap" />
                                     <div className="card-body">
                                         <h5 className="card-title"><strong>Name</strong>:{item.name}</h5>
                                         <p className="card-text"><strong>Material</strong>:{item.material}</p>
-                                        <p className="card-text"><strong>Price</strong>:{item.price}</p>
+                                        <p className="card-text"><strong>Price</strong>:<mdiCurrencyInr/> {item.price}</p>
                                         <p className="card-text"><strong>Stock</strong>:{item.stock}</p>
-                                        <p className="card-text"><strong>createdAt</strong>:{item.createdAt}</p>
                                         <p className="card-text"><strong>createdAt</strong>:{item.createdAt}</p>
                                         <button className='btn btn-danger' onClick={()=>{
                                             // console.log("removed")
@@ -43,10 +57,15 @@ const Cart = () => {
                                     </div>
                             </div>
                 )
-            })
-        }
-
-                
+            })  
+        }    
+            <div>{
+                    amount === 0 ? null :
+                <p><strong>Total:</strong>{amount}</p>
+                }
+               
+            </div>
+                </div>
             </Drawer>
         </div>
     )
