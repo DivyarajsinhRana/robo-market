@@ -1,9 +1,9 @@
 import { Badge, Drawer } from '@material-ui/core';
-import { AddShoppingCart, RemoveCircle} from '@material-ui/icons';
+import { AddOutlined, AddShoppingCart, Remove, RemoveCircle, RemoveCircleOutline, RemoveOutlined} from '@material-ui/icons';
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { removecart } from '../auth/_redux/authaction';
+import { removecart,IncreaseQuantity,DecreaseQuantity } from '../auth/_redux/authaction';
 const Cart = () => {
     const dispatch = useDispatch()
     const cartitem = useSelector(state => state.cart);
@@ -22,6 +22,7 @@ const Cart = () => {
     const amountArrayInt=amountArray.map(price=>price = parseFloat(price));
     console.log(amountArray);
     const [amount,setAmount] = useState(0);
+    // const [count,setCount] = useState(1)
     const total = ()=>{ if(cartitem.length === 0) {
         setAmount(0)
     }
@@ -32,6 +33,15 @@ const Cart = () => {
     useEffect(() => {
         total();
     }, [cartitem])
+
+    const quantity = useSelector(state=> state.quantity); 
+    console.log("Count>>>>",quantity);
+    const handleInc = (item) =>{
+        dispatch(IncreaseQuantity(item))
+    }
+    const handleDec = (quantity) =>{
+        dispatch(DecreaseQuantity(quantity.length))
+    }
     return (
         <div>
             <button className="btn btn-info mx-3" onClick={handleOpen}>
@@ -55,6 +65,11 @@ const Cart = () => {
                                         <button className='btn btn-danger' onClick={()=>{
                                             // console.log("removed")
                                             ;dispatch(removecart(item.name))} }><RemoveCircle/>Remove</button>
+                                    </div>
+                                    <div className='mx-auto'>
+                                                <span onClick={()=>handleDec(item)}><RemoveOutlined/></span>
+                                                <span className='mx-2'>Quantity:{quantity.length}</span>
+                                                <span onClick={()=>handleInc(quantity)} ><AddOutlined/></span>
                                     </div>
                             </div>
                 )

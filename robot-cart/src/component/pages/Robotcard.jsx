@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {addtocart, removecart} from '../auth/_redux/authaction';
+import {addtocart, removecart,IncreaseQuantity} from '../auth/_redux/authaction';
 const Robotcard = ({item,index}) => {
     const dispatch = useDispatch();
     const [btnTxt,setbtnTxt]=useState("Add to cart");
@@ -12,15 +12,13 @@ const Robotcard = ({item,index}) => {
         console.log("click>>>",click);
         console.log("btntxt>>>",btnTxt);
         console.log("class>>",btnStyle);
+        dispatch(IncreaseQuantity(item));
         if(!click){
-            setbtnTxt("remove");
+            setbtnTxt("Added to cart");
             dispatch(addtocart(item))
-            stebtnStyle("danger")
         }
         else{
             setbtnTxt("Add to cart");
-            stebtnStyle("success");
-            dispatch(removecart(item.name));
         }
     }
 

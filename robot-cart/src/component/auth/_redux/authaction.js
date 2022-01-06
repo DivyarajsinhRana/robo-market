@@ -22,6 +22,19 @@ export const removecart = (name) => {
         payload : name
     }
 }
+export const IncreaseQuantity = (item) => {
+    // console.log(item)
+    return {
+        type : "IncreaseQuantity", 
+        payload:item
+    }
+}
+export const DecreaseQuantity = (end) => {
+    return {
+        type : "DecreaseQuantity",
+        payload : end
+    }
+}
 export const getAllRobots = () => {
     return (dispatch) => {
             axios.get(GET_ROBOTS).then((res)=>{
