@@ -7,18 +7,19 @@ const Robotcard = ({item,index}) => {
     const [click,setClick] = useState(false);
     const [btnStyle,stebtnStyle] = useState("success");
     const handleClick = (item) => {
-        console.log(item.name);
-        setClick(!click);
-        console.log("click>>>",click);
-        console.log("btntxt>>>",btnTxt);
-        console.log("class>>",btnStyle);
-        dispatch(IncreaseQuantity(item));
+        // console.log(item.name);
+        setClick(true);
+        // console.log("click>>>",click);
+        // console.log("btntxt>>>",btnTxt);
+        // console.log("class>>",btnStyle);
         if(!click){
-            setbtnTxt("Added to cart");
+            setbtnTxt("Add to cart");
             dispatch(addtocart(item))
+            dispatch(IncreaseQuantity(item));
         }
         else{
-            setbtnTxt("Add to cart");
+            setbtnTxt("Added to cart");
+            alert("Already added to cart")
         }
     }
 

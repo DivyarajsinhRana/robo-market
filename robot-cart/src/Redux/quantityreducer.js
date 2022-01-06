@@ -2,8 +2,8 @@ const initialstate = [] ;
 
 const quantityreducer = (state=initialstate,action)=>{
     if(action.type==="IncreaseQuantity"){
-        console.log(state)
-        console.log(action.payload);
+        // console.log(state)
+        // console.log(action.payload);
         state=[...state,action.payload]
         return state
     }

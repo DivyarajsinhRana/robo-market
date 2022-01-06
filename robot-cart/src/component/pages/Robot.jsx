@@ -31,7 +31,7 @@ const Robot = () => {
     //   const datemap = filterRobots && filterRobots.map(item => item.createdAt = )
     //   console.log(datemap);
     const dateFilter = filterRobots && filterRobots.filter(item =>  item.createdAt = moment(item.createdAt).format("DD/MM/YYYY"));
-    console.log(dateFilter);
+    // console.log(dateFilter);
     const handleChange = (e) => {
         // console.log(e.target.value);
         if (e.target.value === "Available material") {

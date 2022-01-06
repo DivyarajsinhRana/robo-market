@@ -7,7 +7,7 @@ import { removecart,IncreaseQuantity,DecreaseQuantity } from '../auth/_redux/aut
 const Cart = () => {
     const dispatch = useDispatch()
     const cartitem = useSelector(state => state.cart);
-    console.log("cartedItem",cartitem);
+    // console.log("cartedItem",cartitem);
     // console.log("carted Item >>> ",cartitem)
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
@@ -16,26 +16,31 @@ const Cart = () => {
     const handleClose = () => {
         setOpen(false)
     }
+    const quantity = useSelector(state=> state.quantity); 
+    console.log("Count>>>>",quantity);
     // setting total amount
-    const reducer = (previousValue, currentValue) => previousValue + currentValue;
-    const amountArray=cartitem.map(cart=>cart.price);
-    const amountArrayInt=amountArray.map(price=>price = parseFloat(price));
-    console.log(amountArray);
     const [amount,setAmount] = useState(0);
+    const price = quantity.map((item)=> item.price = parseFloat(item.price));
+    console.log("price>>>>",price);
+    const pricerreducer = (previousValue, currentValue) => previousValue + currentValue
+   
+    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    // const amountArray=cartitem.map(cart=>cart.price);
+    // const amountArrayInt=amountArray.map(price=>price = parseFloat(price));
+    // console.log(amountArray);
     // const [count,setCount] = useState(1)
+    const totalamount= price.reduce(pricerreducer,0)
     const total = ()=>{ if(cartitem.length === 0) {
         setAmount(0)
     }
     else{
-        const totalamount = amountArrayInt.reduce(reducer);
         setAmount(totalamount);
     }}
     useEffect(() => {
         total();
-    }, [cartitem])
+    }, [quantity])
 
-    const quantity = useSelector(state=> state.quantity); 
-    console.log("Count>>>>",quantity);
+    
     const handleInc = (item) =>{
         dispatch(IncreaseQuantity(item))
     }
@@ -69,7 +74,10 @@ const Cart = () => {
                                     <div className='mx-auto'>
                                                 <span onClick={()=>handleDec(item)}><RemoveOutlined/></span>
                                                 <span className='mx-2'>Quantity:{quantity.length}</span>
-                                                <span onClick={()=>handleInc(quantity)} ><AddOutlined/></span>
+                                                <span onClick={()=>handleInc(item)} ><AddOutlined/></span>
+                                    </div>
+                                    <div>
+                                    <p className="card-text"><strong>Amount</strong>: {amount}</p>
                                     </div>
                             </div>
                 )
