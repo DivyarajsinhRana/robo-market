@@ -7,7 +7,7 @@ const Robotcard = ({item,index}) => {
     const dispatch = useDispatch();
     const [btnTxt,setbtnTxt]=useState("Add to cart");
     const [click,setClick] = useState(false);
-    const quantity = useSelector(state=> state.quantity);
+    const quantity = useSelector(state=> state.quantity); 
     const handleClick = (item) => {
         // console.log("cartquantitu>>>",i) 
         // console.log(item.name);
@@ -18,7 +18,7 @@ const Robotcard = ({item,index}) => {
         if(!click){
             setbtnTxt("Add to cart");
             dispatch(addtocart(item))
-            dispatch(IncreaseQuantity(item));
+            dispatch(IncreaseQuantity(item,item.name));
             // console.log("stock>>>",item);
             dispatch(stockDec(item));
         }
@@ -36,7 +36,7 @@ const Robotcard = ({item,index}) => {
                                         <p className="card-text"><strong>Price</strong>:{item.price}</p>
                                         <p className="card-text"><strong>Stock</strong>:{item.stock}</p>
                                         <p className="card-text"><strong>createdAt</strong>:{item.createdAt}</p>
-                                       <button className="btn btn-success" onClick={() =>handleClick(item)} id={index}>{btnTxt}</button>
+                                       <button className="btn btn-success" onClick={() =>handleClick(item,item.name)} id={index}>{btnTxt}</button>
                                     </div>
                             </div>
     )

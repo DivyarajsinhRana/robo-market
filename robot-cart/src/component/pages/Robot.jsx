@@ -1,12 +1,12 @@
 import moment from 'moment';
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {  getAllRobots } from '../auth/_redux/authaction';
+import { getAllRobots } from '../auth/_redux/authaction';
 import Cart from './Cart';
 import Filter from './Filter';
 import Robotcard from './Robotcard';
 const Robot = () => {
-    
+
     const dispatch = useDispatch();
     const robotdata = useSelector(state => state.robots.data);
     // const [itemstock,setItemStock] = useState();
@@ -16,30 +16,30 @@ const Robot = () => {
     useEffect(() => {
         dispatch(getAllRobots());
     }, [])
-    const filterRobots = robotdata && robotdata.filter((item) => 
-         item.createdAt =  moment(item.createdAt).format("DD/MM/YYYY")
-        )
-    
+    const filterRobots = robotdata && robotdata.filter((item) =>
+        item.createdAt = moment(item.createdAt).format("DD/MM/YYYY")
+    )
+
     useEffect(() => {
         setAllrobots(filterRobots);
     }, [robotdata])
     const length = allrobots && allrobots.length;
     const handleChange = (e) => {
         if (e.target.value === "Available material") {
-           setAllrobots(filterRobots)
+            setAllrobots(filterRobots)
         }
         else {
-           setAllrobots(filterRobots.filter(item => item.material === e.target.value))
+            setAllrobots(filterRobots.filter(item => item.material === e.target.value))
         }
     }
-      const stock = useSelector(state=>state.stock);
+    const stock = useSelector(state => state.stock);
     // console.log("stock>>>",stock)
     return (
         <div className='row mt-2'>
-            <Cart/>
+            <Cart />
             <Filter length={length} handleChange={handleChange} />
             {
-               allrobots && allrobots.map((item, index) => {
+                allrobots && allrobots.map((item, index) => {
                     // console.log("item>>>",item)
                     return (
                         <div className='col-3 mt-3 gx-5' key={index}>
