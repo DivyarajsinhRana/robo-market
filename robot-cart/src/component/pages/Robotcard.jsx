@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {addtocart, removecart,IncreaseQuantity, stockDec} from '../auth/_redux/authaction';
 
-const Robotcard = ({item,index,stock}) => {
+const Robotcard = ({item,index}) => {
     const dispatch = useDispatch();
     const [btnTxt,setbtnTxt]=useState("Add to cart");
     const [click,setClick] = useState(false);
+    const quantity = useSelector(state=> state.quantity);
     const handleClick = (item) => {
+        // console.log("cartquantitu>>>",i) 
         // console.log(item.name);
         setClick(true);
         // console.log("click>>>",click);
@@ -17,7 +19,7 @@ const Robotcard = ({item,index,stock}) => {
             setbtnTxt("Add to cart");
             dispatch(addtocart(item))
             dispatch(IncreaseQuantity(item));
-            console.log("stock>>>",item);
+            // console.log("stock>>>",item);
             dispatch(stockDec(item));
         }
         else{
@@ -25,9 +27,6 @@ const Robotcard = ({item,index,stock}) => {
             alert("Already added to cart")
         }
     }
-  
-    
-   
     return (
         <div className="card" style={{width: "18rem"}}>
                                 <img className="card-img-top" src={item.image} alt="Card image cap" />

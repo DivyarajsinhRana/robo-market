@@ -3,7 +3,7 @@ import { AddOutlined, AddShoppingCart, Remove, RemoveCircle, RemoveCircleOutline
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { removecart,IncreaseQuantity,DecreaseQuantity,stockDec,stockInc } from '../auth/_redux/authaction';
+import { removecart,IncreaseQuantity,DecreaseQuantity,stockDec,stockInc, getAllRobots } from '../auth/_redux/authaction';
 const Cart = () => {
     const dispatch = useDispatch()
     const cartitem = useSelector(state => state.cart);
@@ -33,7 +33,7 @@ const Cart = () => {
     useEffect(() => {
         total();
     }, [quantity])
-
+    
     
     const handleInc = (item) =>{
         dispatch(IncreaseQuantity(item))
@@ -43,6 +43,10 @@ const Cart = () => {
             dispatch(DecreaseQuantity(quantity.length))
             console.log(quantity);
             dispatch(stockInc(quantity));
+    }
+    const handleremove = (item) => {
+        dispatch(removecart(item.name))
+        dispatch(stockInc())
     }
     return (
         <div>
@@ -64,9 +68,7 @@ const Cart = () => {
                                         <p className="card-text"><strong>Price</strong>: {item.price}</p>
                                         <p className="card-text"><strong>Stock</strong>:{item.stock}</p>
                                         <p className="card-text"><strong>createdAt</strong>:{item.createdAt}</p>
-                                        <button className='btn btn-danger' onClick={()=>{
-                                            // console.log("removed")
-                                            ;dispatch(removecart(item.name))} }><RemoveCircle/>Remove</button>
+                                        <button className='btn btn-danger' onClick={()=>handleremove(item)}><RemoveCircle/>Remove</button>
                                     </div>
                                     <div className='mx-auto'>
                                                 <span onClick={()=>handleDec(item)}><RemoveOutlined/></span>

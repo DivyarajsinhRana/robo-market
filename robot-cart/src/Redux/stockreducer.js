@@ -2,7 +2,7 @@ const initialstock = [] ;
 
 const stockreducer = (state=initialstock,action) => {
     if(action.type==="stockdecrease"){
-            console.log(state)
+            // console.log(state)
             const stateDec= action.payload.filter((item)=> item.stock = item.stock -1)
             state = [...state,...stateDec]
             // console.log(state);

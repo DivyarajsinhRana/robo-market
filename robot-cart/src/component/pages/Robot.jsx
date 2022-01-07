@@ -19,17 +19,7 @@ const Robot = () => {
     const filterRobots = robotdata && robotdata.filter((item) => 
          item.createdAt =  moment(item.createdAt).format("DD/MM/YYYY")
         )
-    const handleStock = (itemstock)=>{
-        if(stock === 0){
-            return itemstock
-        }
-        else{
-            return stock
-        }
-    }
-    // const stockFilter = filterRobots && filterRobots.filter((item)=> item.stock = handleStock(item.stock))
-    // console.log(stockFilter);
-
+    
     useEffect(() => {
         setAllrobots(filterRobots);
     }, [robotdata])
@@ -43,24 +33,7 @@ const Robot = () => {
         }
     }
       const stock = useSelector(state=>state.stock);
-    console.log("stock>>>",stock)
-    const [itemstock,setitemstock] = useState(stock);
-
-    // const stockFilter = filterRobots && filterRobots.filter((item)=>{
-    //     if(stock === 0 ){
-    //         setitemstock(item.stock)
-    //     }
-    //     else if (item.stock === 0){
-    //         setitemstock(item.stock)
-    //     }
-    //     else {
-    //         setitemstock(stock)
-    //     }
-    // })
-    // useEffect(() => {
-    //    setAllrobots(stockFilter);
-    // }, [stock])
-    
+    // console.log("stock>>>",stock)
     return (
         <div className='row mt-2'>
             <Cart/>
@@ -70,7 +43,7 @@ const Robot = () => {
                     // console.log("item>>>",item)
                     return (
                         <div className='col-3 mt-3 gx-5' key={index}>
-                            <Robotcard index={index} item={item} stock={itemstock}/>
+                            <Robotcard index={index} item={item} />
                         </div>
                     )
                 })
