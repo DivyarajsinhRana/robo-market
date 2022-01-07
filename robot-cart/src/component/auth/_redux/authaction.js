@@ -35,16 +35,16 @@ export const DecreaseQuantity = (end) => {
         payload : end
     }
 }
-export const stockInc = (count) =>{
+export const stockInc = (robot) =>{
     return{
         type : "stockincrease",
-        payload : count
+        payload : [robot]
     }
 }
-export const stockDec = (count) =>{
+export const stockDec = (robot) =>{
     return{
         type : "stockdecrease",
-        payload : count
+        payload :[robot]
     }
 }
 export const getAllRobots = () => {

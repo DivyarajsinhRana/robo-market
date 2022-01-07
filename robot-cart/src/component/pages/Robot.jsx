@@ -9,50 +9,68 @@ const Robot = () => {
     
     const dispatch = useDispatch();
     const robotdata = useSelector(state => state.robots.data);
-    const stock = useSelector(state => state.stock);
-
-    // console.log("selected state >>>", robotdata);
-    // const material = robotdata.map((item)=> item.material);
-    // console.log("material>>>", material);
-    // const set = new Set(material);
-    // console.log("set>>",set);
+    // const [itemstock,setItemStock] = useState();
+    // console.log("robotstock>>>",robotdata.stock);
     const [allrobots, setAllrobots] = useState([]);
-    const [filterRobots, setFilterRobots] = useState([]);
+    // const [filterRobots, setFilterRobots] = useState([]);
     useEffect(() => {
         dispatch(getAllRobots());
     }, [])
-    useEffect(() => {
-        setAllrobots(robotdata)
-        setFilterRobots(robotdata);
-        // console.log("useStatedata>>>", robotdata);
-    }, [robotdata])
-
-   
-    const length = filterRobots && filterRobots.length;
-    //   const datemap = filterRobots && filterRobots.map(item => item.createdAt = )
-    //   console.log(datemap);
-    const dateFilter = filterRobots && filterRobots.filter(item =>  item.createdAt = moment(item.createdAt).format("DD/MM/YYYY"));
-    // console.log(dateFilter);
-    const handleChange = (e) => {
-        // console.log(e.target.value);
-        if (e.target.value === "Available material") {
-            setFilterRobots(allrobots)
+    const filterRobots = robotdata && robotdata.filter((item) => 
+         item.createdAt =  moment(item.createdAt).format("DD/MM/YYYY")
+        )
+    const handleStock = (itemstock)=>{
+        if(stock === 0){
+            return itemstock
         }
-        else {
-            setFilterRobots(allrobots.filter(item => item.material === e.target.value))
+        else{
+            return stock
         }
     }
-    return (
+    // const stockFilter = filterRobots && filterRobots.filter((item)=> item.stock = handleStock(item.stock))
+    // console.log(stockFilter);
 
+    useEffect(() => {
+        setAllrobots(filterRobots);
+    }, [robotdata])
+    const length = allrobots && allrobots.length;
+    const handleChange = (e) => {
+        if (e.target.value === "Available material") {
+           setAllrobots(filterRobots)
+        }
+        else {
+           setAllrobots(filterRobots.filter(item => item.material === e.target.value))
+        }
+    }
+      const stock = useSelector(state=>state.stock);
+    console.log("stock>>>",stock)
+    const [itemstock,setitemstock] = useState(stock);
+
+    // const stockFilter = filterRobots && filterRobots.filter((item)=>{
+    //     if(stock === 0 ){
+    //         setitemstock(item.stock)
+    //     }
+    //     else if (item.stock === 0){
+    //         setitemstock(item.stock)
+    //     }
+    //     else {
+    //         setitemstock(stock)
+    //     }
+    // })
+    // useEffect(() => {
+    //    setAllrobots(stockFilter);
+    // }, [stock])
+    
+    return (
         <div className='row mt-2'>
             <Cart/>
             <Filter length={length} handleChange={handleChange} />
             {
-               dateFilter && dateFilter.map((item, index) => {
-                    // console.log("item>>>", item.name)
+               allrobots && allrobots.map((item, index) => {
+                    // console.log("item>>>",item)
                     return (
                         <div className='col-3 mt-3 gx-5' key={index}>
-                            <Robotcard index={index} item={item} stock={stock}/>
+                            <Robotcard index={index} item={item} stock={itemstock}/>
                         </div>
                     )
                 })

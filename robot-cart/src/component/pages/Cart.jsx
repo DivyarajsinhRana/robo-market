@@ -17,14 +17,14 @@ const Cart = () => {
         setOpen(false)
     }
     const quantity = useSelector(state=> state.quantity); 
-    console.log("Count>>>>",quantity);
+    // console.log("Count>>>>",quantity);
     // setting total amount
     const [amount,setAmount] = useState(0);
     const price = quantity.map((item)=> item.price = parseFloat(item.price));
-    console.log("price>>>>",price);
+    // console.log("price>>>>",price);
     const pricerreducer = (previousValue, currentValue) => previousValue + currentValue
     const totalamount= price.reduce(pricerreducer,0)
-    const total = ()=>{ if(quantity.length === 0) {
+    const total = ()=>{ if(quantity.length && cartitem.length === 0) {
         setAmount(0)
     }
     else{
@@ -37,11 +37,12 @@ const Cart = () => {
     
     const handleInc = (item) =>{
         dispatch(IncreaseQuantity(item))
-        dispatch(stockDec(item.stock))
+        dispatch(stockDec(item))
     }
     const handleDec = (quantity) =>{
             dispatch(DecreaseQuantity(quantity.length))
-            dispatch(stockInc(quantity.stock));
+            console.log(quantity);
+            dispatch(stockInc(quantity));
     }
     return (
         <div>
@@ -80,7 +81,7 @@ const Cart = () => {
             })  
         }    
             <div>{
-                    amount === 0 ? null :
+                    cartitem.length === 0 ? null :
                 <p><strong>Total:</strong>{amount}</p>
                 }
                
