@@ -1,6 +1,11 @@
-const initialstate  = {
-    robots : [],
-};
+const initialstate  =[ {
+    name : "",
+    image : "",
+    material : "",
+    price : "",
+    stock : "",
+    createdAt : ""
+}];
 // const robots = [] 
 const robotreducer = (state = initialstate,action)=> {
         if(action.type==="getrobots"){

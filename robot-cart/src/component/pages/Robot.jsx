@@ -9,6 +9,7 @@ const Robot = () => {
 
     const dispatch = useDispatch();
     const robotdata = useSelector(state => state.robots.data);
+    console.log(robotdata);
     // const [itemstock,setItemStock] = useState();
     // console.log("robotstock>>>",robotdata.stock);
     const [allrobots, setAllrobots] = useState([]);
